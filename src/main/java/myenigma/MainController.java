@@ -192,17 +192,16 @@ public class MainController {
                     ProgressField.progressProperty().addListener(observable -> {
                         if (ProgressField.getProgress() >= 1-EPSILON) {
                             ProgressField.setStyle("-fx-accent: forestgreen;");
+                            if (crypt.getFinished()) {
+                                StatusField.setText("Успех");
+                            }
+                        } else {
+                            StatusField.setText("Выполнение...");
                         }
                     });
                     Thread thread = new Thread(start);
                     thread.setDaemon(true);
                     thread.start();
-                    //thread.join();
-                    StatusField.setText("Выполнение...");
-                    if (crypt.getFinished()) {
-                        Thread.sleep(2000);
-                        StatusField.setText("Успех");
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     StatusField.setText("Ошибка. Перезапустите программу");
