@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\ASUS\Desktop\MyEnigma3\out\artifacts\MyEnigma3_jar\MyEnigma3.jar</jar>
+  <outfile>C:\Users\ASUS\Desktop\5555\MyEnigma.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.0.6_22</minVersion>
+    <maxVersion>11.2</maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+    <opt>--module-path &quot;C:\Users\ASUS\Desktop\JAVARush\JavaRushTasks\JavaFX\javafx-sdk-18.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml </opt>
+  </jre>
+</launch4jConfig>

@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MyEnigma3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MyEnigma3_jar</output-path>
+    <root id="archive" name="MyEnigma3.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="MyEnigma3" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../JAVARush/JavaRushTasks/JavaFX/javafx-sdk-18.0.1/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="module-source" name="MyEnigma3" />
+    </root>
+  </artifact>
+</component>
