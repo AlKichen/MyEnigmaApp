@@ -1,13 +1,18 @@
 package myenigma;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -56,6 +61,26 @@ public class MainController {
 
     @FXML
     void initialize() {
+        HelpButton.setOnAction(actionEvent -> {
+           Stage owner = (Stage)HelpButton.getParentPopup().getOwnerWindow();
+            Scene scene = owner.getScene();
+            scene.getWindow().hide();
+            System.out.println("Вы нажали справку");
+
+            FXMLLoader loader = new FXMLLoader(); //(getClass().getResource("HelpWindow.fxml"));
+            loader.setLocation(getClass().getResource("HelpWindow.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Инструкция");
+            stage.show();
+        });
+
         String[] args = new String[3];
         ArrayList<String> value0 = new ArrayList<>();
         ChoiceBox.setItems(FXCollections.observableArrayList("Зашифровать", "Расшифровать"));            //инициализируем choose box
@@ -101,6 +126,12 @@ public class MainController {
                 System.out.println(outputFile.getAbsolutePath());
             }
         });
+        QuitButton.setOnAction(actionEvent -> {
+            Platform.exit();
+        });
+        /*HelpButton.setOnAction(actionEvent -> {
+
+        });*/
 
 
     }
