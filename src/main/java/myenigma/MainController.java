@@ -2,9 +2,11 @@ package myenigma;
 
 import java.io.File;
 import java.io.IOException;
+import java.awt.Desktop;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
@@ -58,6 +60,14 @@ public class MainController {
     @FXML
     private ChoiceBox<String> ChoiceBox;
 
+    @FXML
+    private Button ButtonRefresh;
+
+    @FXML
+    private CheckBox checkBoxOpenFile;
+
+    private boolean openFile = false;
+
     private static final double EPSILON = 0.0000005;
 
     @FXML
@@ -66,7 +76,7 @@ public class MainController {
             Stage owner = (Stage) AboutButton.getParentPopup().getOwnerWindow();
             Scene scene = owner.getScene();
             scene.getWindow().hide();
-            System.out.println("Вы нажали О программе");
+            //System.out.println("Вы нажали О программе");
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("AboutWindow.fxml"));
@@ -86,7 +96,7 @@ public class MainController {
             Stage owner = (Stage) HelpButton.getParentPopup().getOwnerWindow();
             Scene scene = owner.getScene();
             scene.getWindow().hide();
-            System.out.println("Вы нажали справку");
+            //System.out.println("Вы нажали справку");
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("HelpWindow.fxml"));
@@ -121,7 +131,7 @@ public class MainController {
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
             fileChooser.getExtensionFilters().add(extFilter);
             File inputFile = fileChooser.showOpenDialog(new Stage());
-            System.out.println("Вы нажали на кнопку выбора inputFile");
+            //System.out.println("Вы нажали на кнопку выбора inputFile");
             String inputFileName = null;
             if (inputFile != null) {
                 inputFileName = inputFile.getAbsolutePath();
@@ -135,7 +145,7 @@ public class MainController {
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
             fileChooser.getExtensionFilters().add(extFilter);
             File inputFile = fileChooser.showOpenDialog(new Stage());
-            System.out.println("Вы нажали на кнопку выбора inputFile");
+            //System.out.println("Вы нажали на кнопку выбора inputFile");
             if (inputFile != null) {
                 String inputFileName = inputFile.getAbsolutePath();
                 System.out.println(inputFile.getAbsolutePath());
@@ -146,7 +156,7 @@ public class MainController {
         ButtonFileOutput.setOnAction(actionEvent -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File outputFile = directoryChooser.showDialog(new Stage());
-            System.out.println("Вы нажали на кнопку выбора OutputFile");
+            //System.out.println("Вы нажали на кнопку выбора OutputFile");
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
                 System.out.println(outputFile.getAbsolutePath());
@@ -158,7 +168,7 @@ public class MainController {
         MenuButtonFileOutput.setOnAction(actionEvent -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File outputFile = directoryChooser.showDialog(new Stage());
-            System.out.println("Вы нажали на кнопку выбора OutputFile");
+            //System.out.println("Вы нажали на кнопку выбора OutputFile");
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
                 System.out.println(outputFile.getAbsolutePath());
@@ -190,7 +200,7 @@ public class MainController {
 
                     ProgressField.progressProperty().bind(start.progressProperty());
                     ProgressField.progressProperty().addListener(observable -> {
-                        if (ProgressField.getProgress() >= 1-EPSILON) {
+                        if (ProgressField.getProgress() >= 1 - EPSILON) {
                             ProgressField.setStyle("-fx-accent: forestgreen;");
                             if (crypt.getFinished()) {
                                 StatusField.setText("Успех");
@@ -209,8 +219,40 @@ public class MainController {
             } else {
                 StatusField.setText("Выполните все действия перед запуском!");
             }
+            if (crypt.getFinished() && openFile) {
+                File file = new File(args[2]);
+                Desktop desktop = Desktop.getDesktop();
+                try {
+                    desktop.open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
+        ButtonRefresh.setOnAction(actionEvent -> {
+            ButtonRefresh.getScene().getWindow().hide();
 
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FirstWindow.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("MyEnigma 3.0");
+            stage.show();
+        });
+
+        checkBoxOpenFile.setOnAction(actionEvent -> {
+            if (checkBoxOpenFile.isSelected()) {
+                openFile = true;
+            } else {
+                openFile = false;
+            }
+        });
     }
 }

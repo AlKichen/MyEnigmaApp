@@ -64,7 +64,7 @@ public class AboutWindowController {
             Stage owner = (Stage) HelpButton.getParentPopup().getOwnerWindow();
             Scene scene = owner.getScene();
             scene.getWindow().hide();
-            System.out.println("Вы нажали справку");
+            //System.out.println("Вы нажали справку");
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("HelpWindow.fxml"));
