@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,13 +60,33 @@ public class MainController {
 
     @FXML
     void initialize() {
+        AboutButton.setOnAction(actionEvent -> {
+            Stage owner = (Stage) AboutButton.getParentPopup().getOwnerWindow();
+            Scene scene = owner.getScene();
+            scene.getWindow().hide();
+            System.out.println("Вы нажали О программе");
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("AboutWindow.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("О Программе");
+            stage.show();
+        });
+
         HelpButton.setOnAction(actionEvent -> {
-           Stage owner = (Stage)HelpButton.getParentPopup().getOwnerWindow();
+            Stage owner = (Stage) HelpButton.getParentPopup().getOwnerWindow();
             Scene scene = owner.getScene();
             scene.getWindow().hide();
             System.out.println("Вы нажали справку");
 
-            FXMLLoader loader = new FXMLLoader(); //(getClass().getResource("HelpWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("HelpWindow.fxml"));
             try {
                 loader.load();
@@ -86,6 +105,7 @@ public class MainController {
         ChoiceBox.setItems(FXCollections.observableArrayList("Зашифровать", "Расшифровать"));            //инициализируем choose box
         ChoiceBox.setOnAction(actionEvent -> {
             value0.add(ChoiceBox.getValue());
+            args[0] = value0.get(value0.size() - 1);
         });
 
         ButtonFileInput.setOnAction(actionEvent -> {                                                        //обрабатываем нажатие на кнопку выбора входящего файла
@@ -94,8 +114,12 @@ public class MainController {
             fileChooser.getExtensionFilters().add(extFilter);
             File inputFile = fileChooser.showOpenDialog(new Stage());
             System.out.println("Вы нажали на кнопку выбора inputFile");
-            String inputFileName = inputFile.getAbsolutePath();
-            System.out.println(inputFile.getAbsolutePath());
+            String inputFileName = null;
+            if (inputFile != null) {
+                inputFileName = inputFile.getAbsolutePath();
+                System.out.println(inputFile.getAbsolutePath());
+                args[1] = inputFileName;
+            }
         });
         MenuButtonFileInput.setOnAction(actionEvent -> {                                                        //обрабатываем нажатие на кнопку выбора входящего файла
             FileChooser fileChooser = new FileChooser();
@@ -106,6 +130,7 @@ public class MainController {
             if (inputFile != null) {
                 String inputFileName = inputFile.getAbsolutePath();
                 System.out.println(inputFile.getAbsolutePath());
+                args[1] = inputFileName;
             }
         });
         ButtonFileOutput.setOnAction(actionEvent -> {
@@ -115,6 +140,8 @@ public class MainController {
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
                 System.out.println(outputFile.getAbsolutePath());
+                args[2] = outputFileName + "\\результат из программы MyEnigma.txt";
+                System.out.println(args[2]);
             }
         });
         MenuButtonFileOutput.setOnAction(actionEvent -> {
@@ -124,14 +151,13 @@ public class MainController {
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
                 System.out.println(outputFile.getAbsolutePath());
+                args[2] = outputFileName + "\\результат из программы MyEnigma.txt";
+                System.out.println(args[2]);
             }
         });
         QuitButton.setOnAction(actionEvent -> {
             Platform.exit();
         });
-        /*HelpButton.setOnAction(actionEvent -> {
-
-        });*/
 
 
     }

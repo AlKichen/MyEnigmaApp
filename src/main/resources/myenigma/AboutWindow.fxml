@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="454.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myenigma.AboutWindowController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Файл">
+          <items>
+            <MenuItem fx:id="MenuButtonFileInput" disable="true" mnemonicParsing="false" text="Выбрать файл для зашифровывания/расшифровывания" />
+            <MenuItem fx:id="MenuButtonFileOutput" disable="true" mnemonicParsing="false" text="Выбрать место сохранения файла с результатом" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="QuitButton" mnemonicParsing="false" text="Выйти" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Помощь">
+          <items>
+            <MenuItem fx:id="HelpButton" mnemonicParsing="false" text="Справка" />
+                  <MenuItem fx:id="AboutButton" disable="true" mnemonicParsing="false" text="О приложении" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  <Pane prefHeight="0.0" prefWidth="775.0" />
+      <AnchorPane prefHeight="576.0" prefWidth="383.0">
+         <children>
+            <Button fx:id="returnButton" layoutX="158.0" layoutY="337.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Продолжить" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="2.0" prefHeight="78.0" prefWidth="338.0" text="ВНИМАНИЕ! Программа создана в учебных целях, пожалуйста не храните критически важную информацию в зашифрованных файлах. Автор не несёт ответственности за сохранность данных" textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font name="Arial Black" size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="107.0" prefHeight="100.0" prefWidth="338.0" text="Программа предназначена для шифрования/дешифрования файлов формата &quot;.txt&quot;. Вы можете записать информацию в файл, сохранить его в формате &quot;.txt&quot;, а затем зашифровать его, с помощью этой программы.  Когда вам будет необходимо обратиться к содержимому файла, вы запросто сможете его расшифровать используя &quot;MyEnigma&quot;." textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="44.0" layoutY="232.0" prefHeight="18.0" prefWidth="338.0" text="Автор: Киченко Алексей" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="44.0" layoutY="251.0" prefHeight="18.0" prefWidth="338.0" text="По всем вопросам обращаться: kich126@mail.ru" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="44.0" layoutY="269.0" prefHeight="18.0" prefWidth="338.0" text="Версия программы: 3.0" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+  </children>
+</VBox>

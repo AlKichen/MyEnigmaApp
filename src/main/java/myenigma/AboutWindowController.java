@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-public class HelpWindowController {
+public class AboutWindowController {
 
     @FXML
     private ResourceBundle resources;
@@ -60,14 +60,14 @@ public class HelpWindowController {
             stage.setTitle("MyEnigma 3.0");
             stage.show();
         });
-        AboutButton.setOnAction(actionEvent -> {
-            Stage owner = (Stage) AboutButton.getParentPopup().getOwnerWindow();
+        HelpButton.setOnAction(actionEvent -> {
+            Stage owner = (Stage) HelpButton.getParentPopup().getOwnerWindow();
             Scene scene = owner.getScene();
             scene.getWindow().hide();
-            System.out.println("Вы нажали О программе");
+            System.out.println("Вы нажали справку");
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("AboutWindow.fxml"));
+            loader.setLocation(getClass().getResource("HelpWindow.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
@@ -76,9 +76,10 @@ public class HelpWindowController {
             Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("О Программе");
+            stage.setTitle("Инструкция");
             stage.show();
         });
+
     }
 
 }
