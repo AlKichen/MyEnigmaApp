@@ -1,4 +1,6 @@
 package myenigma;
+import javafx.concurrent.Task;
+
 import java.io.*;
 
 
@@ -17,13 +19,29 @@ d - ключ указывает, что необходимо расшифров�
 public class crypt {
     private static int numberOfEncryptions = (int) Math.ceil(3 + Math.random() * 126); // создаем число итераций шифрования (от 3 до 126 включительно)
 
+    private static boolean isFinished = false;
+
+    public static boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.isFinished = finished;
+    }
+
     public static void startCrypt(String[] args) {
         switch (args[0]) {
             case "e":
+                crypt crypt1 = new crypt();
+                crypt1.setFinished(false);
                 encrypt(args[1], args[2]);
+                crypt1.setFinished(true);
                 break;
             case "d":
+                crypt crypt = new crypt();
+                crypt.setFinished(false);
                 decryption(args[1], args[2]);
+                crypt.setFinished(true);
                 break;
         }
     }
@@ -80,6 +98,5 @@ public class crypt {
             e.printStackTrace();
         }
     }
-
-
 }
+

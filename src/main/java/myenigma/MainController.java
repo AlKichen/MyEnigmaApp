@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,6 +58,8 @@ public class MainController {
     @FXML
     private ChoiceBox<String> ChoiceBox;
 
+    private static final double EPSILON = 0.0000005;
+
     @FXML
     void initialize() {
         AboutButton.setOnAction(actionEvent -> {
@@ -105,7 +107,13 @@ public class MainController {
         ChoiceBox.setItems(FXCollections.observableArrayList("Зашифровать", "Расшифровать"));            //инициализируем choose box
         ChoiceBox.setOnAction(actionEvent -> {
             value0.add(ChoiceBox.getValue());
-            args[0] = value0.get(value0.size() - 1);
+            if ((value0.get(value0.size() - 1)).equals("Зашифровать")) {
+                args[0] = "e";
+            } else if ((value0.get(value0.size() - 1)).equals("Расшифровать")) {
+                args[0] = "d";
+            } else {
+                args[0] = null;
+            }
         });
 
         ButtonFileInput.setOnAction(actionEvent -> {                                                        //обрабатываем нажатие на кнопку выбора входящего файла
@@ -121,6 +129,7 @@ public class MainController {
                 args[1] = inputFileName;
             }
         });
+
         MenuButtonFileInput.setOnAction(actionEvent -> {                                                        //обрабатываем нажатие на кнопку выбора входящего файла
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
@@ -133,6 +142,7 @@ public class MainController {
                 args[1] = inputFileName;
             }
         });
+
         ButtonFileOutput.setOnAction(actionEvent -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File outputFile = directoryChooser.showDialog(new Stage());
@@ -144,6 +154,7 @@ public class MainController {
                 System.out.println(args[2]);
             }
         });
+
         MenuButtonFileOutput.setOnAction(actionEvent -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File outputFile = directoryChooser.showDialog(new Stage());
@@ -155,11 +166,52 @@ public class MainController {
                 System.out.println(args[2]);
             }
         });
+
         QuitButton.setOnAction(actionEvent -> {
             Platform.exit();
         });
 
+        StartButton.setOnAction(actionEvent -> {
+            if (args[0] != null && args[1] != null && args[2] != null) {
+                try {
+                    crypt.startCrypt(args);
+                    final Task<Void> start = new Task<Void>() {
+                        final int iterations = 100;
+
+                        @Override
+                        protected Void call() throws Exception {
+                            for (int i = 0; i < iterations; i++) {
+                                updateProgress(i + 1, iterations);
+                                Thread.sleep(10);
+                            }
+                            return null;
+                        }
+                    };
+
+                    ProgressField.progressProperty().bind(start.progressProperty());
+                    ProgressField.progressProperty().addListener(observable -> {
+                        if (ProgressField.getProgress() >= 1-EPSILON) {
+                            ProgressField.setStyle("-fx-accent: forestgreen;");
+                        }
+                    });
+                    Thread thread = new Thread(start);
+                    thread.setDaemon(true);
+                    thread.start();
+                    //thread.join();
+                    StatusField.setText("Выполнение...");
+                    if (crypt.getFinished()) {
+                        Thread.sleep(2000);
+                        StatusField.setText("Успех");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    StatusField.setText("Ошибка. Перезапустите программу");
+                }
+            } else {
+                StatusField.setText("Выполните все действия перед запуском!");
+            }
+        });
+
 
     }
-
 }
