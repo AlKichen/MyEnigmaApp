@@ -135,7 +135,7 @@ public class MainController {
             String inputFileName = null;
             if (inputFile != null) {
                 inputFileName = inputFile.getAbsolutePath();
-                System.out.println(inputFile.getAbsolutePath());
+                //System.out.println(inputFile.getAbsolutePath());
                 args[1] = inputFileName;
             }
         });
@@ -148,7 +148,7 @@ public class MainController {
             //System.out.println("Вы нажали на кнопку выбора inputFile");
             if (inputFile != null) {
                 String inputFileName = inputFile.getAbsolutePath();
-                System.out.println(inputFile.getAbsolutePath());
+                //System.out.println(inputFile.getAbsolutePath());
                 args[1] = inputFileName;
             }
         });
@@ -159,9 +159,9 @@ public class MainController {
             //System.out.println("Вы нажали на кнопку выбора OutputFile");
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
-                System.out.println(outputFile.getAbsolutePath());
+                //System.out.println(outputFile.getAbsolutePath());
                 args[2] = outputFileName + "\\результат из программы MyEnigma.txt";
-                System.out.println(args[2]);
+                //System.out.println(args[2]);
             }
         });
 
@@ -171,9 +171,9 @@ public class MainController {
             //System.out.println("Вы нажали на кнопку выбора OutputFile");
             if (outputFile != null) {
                 String outputFileName = outputFile.getAbsolutePath();
-                System.out.println(outputFile.getAbsolutePath());
+                //System.out.println(outputFile.getAbsolutePath());
                 args[2] = outputFileName + "\\результат из программы MyEnigma.txt";
-                System.out.println(args[2]);
+                //System.out.println(args[2]);
             }
         });
 
